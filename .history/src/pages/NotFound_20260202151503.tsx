@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Home, Search } from "lucide-react";
+import { Home, Search, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
@@ -8,7 +8,7 @@ const NotFound = () => {
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-10 w-32 h-32 bg-[#A87749] opacity-10 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-32 h-32 bg-[#D2691E] opacity-10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             x: [0, 50, 0],
@@ -21,7 +21,7 @@ const NotFound = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-40 h-40 bg-[#5D6F70] opacity-10 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-40 h-40 bg-[#8B4513] opacity-10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.3, 1],
             x: [0, -40, 0],
@@ -48,11 +48,10 @@ const NotFound = () => {
             className="text-[180px] md:text-[280px] font-bold leading-none"
             style={{
               fontFamily: "'Playfair Display', serif",
-              background: "linear-gradient(135deg, #A87749 0%, #5D6F70 50%, #A87749 100%)",
+              background: "linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              backgroundSize: "200% 100%",
             }}
             animate={{
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -72,7 +71,7 @@ const NotFound = () => {
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute text-[#A87749] opacity-20"
+              className="absolute text-[#8B4513] opacity-20"
               style={{
                 left: `${Math.random() * 80 + 10}%`,
                 top: `${Math.random() * 80 + 10}%`,
@@ -88,7 +87,12 @@ const NotFound = () => {
                 delay: i * 0.5,
               }}
             >
-              <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                width="60"
+                height="60"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M4 19h16v2H4zM20 9l-8-6-8 6v10h16V9zm-6 8h-4v-6h4v6z" />
               </svg>
             </motion.div>
@@ -103,12 +107,12 @@ const NotFound = () => {
           className="text-center max-w-2xl mb-12"
         >
           <h2
-            className="text-4xl md:text-5xl font-bold text-[#070809] mb-4"
+            className="text-4xl md:text-5xl font-bold text-[#2C2C2C] mb-4"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Page Not Found
           </h2>
-          <p className="text-lg md:text-xl text-[#5D6F70] leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          <p className="text-lg md:text-xl text-[#666] leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
             Looks like this piece of furniture has been moved to a different room. 
             Let's help you find what you're looking for.
           </p>
@@ -125,7 +129,7 @@ const NotFound = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#A87749] to-[#5D6F70] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#8B4513] to-[#D2691E] text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               <Home className="w-5 h-5" />
@@ -144,7 +148,7 @@ const NotFound = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 px-8 py-4 bg-white text-[#A87749] border-2 border-[#A87749] rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="flex items-center gap-3 px-8 py-4 bg-white text-[#8B4513] border-2 border-[#8B4513] rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               <Search className="w-5 h-5" />
@@ -160,7 +164,7 @@ const NotFound = () => {
           transition={{ duration: 1, delay: 1 }}
           className="mt-16 text-center"
         >
-          <p className="text-sm text-[#5D6F70] mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          <p className="text-sm text-[#999] mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
             Need help? Contact us
           </p>
           <div className="flex justify-center gap-6">

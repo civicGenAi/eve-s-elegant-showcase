@@ -57,7 +57,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-4"
           >
-            Evo Furniture Ltd
+            Eve Furniture Ltd
           </motion.p>
 
           {/* Morphing Text */}

@@ -33,7 +33,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="https://www.instagram.com/evo_furniture/"
+                href="https://instagram.com/evefurniture"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-muted/10 hover:bg-accent transition-colors"
@@ -103,8 +103,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-accent flex-shrink-0" />
-                <a href="mailto:info@evofurniture.co.tz" className="text-muted-foreground hover:text-primary-foreground text-sm">
-                  info@evofurniture.co.tz
+                <a href="mailto:info@evefurniture.co.tz" className="text-muted-foreground hover:text-primary-foreground text-sm">
+                  info@evefurniture.co.tz
                 </a>
               </li>
               <li className="flex items-start gap-3">
@@ -145,10 +145,10 @@ const Footer = () => {
             © {currentYear} Eve Furniture Ltd. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary-foreground text-sm">
+            <Link to="/privacy" className="text-muted-foreground hover:text-primary-foreground text-sm">
               Privacy Policy
             </Link>
-            <Link to="/terms-of-use" className="text-muted-foreground hover:text-primary-foreground text-sm">
+            <Link to="/terms" className="text-muted-foreground hover:text-primary-foreground text-sm">
               Terms & Conditions
             </Link>
           </div>

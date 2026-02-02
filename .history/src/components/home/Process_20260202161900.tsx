@@ -141,30 +141,8 @@ const Process = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
             {steps.map((step, index) => {
               const StepIcon = step.icon;
-              // Get animation based on step title
-              let animation;
-              switch (step.title) {
-                case 'Consultation':
-                  animation = iconAnimations.MessageSquare;
-                  break;
-                case 'Design':
-                  animation = iconAnimations.Pencil;
-                  break;
-                case 'Material Selection':
-                  animation = iconAnimations.Layers;
-                  break;
-                case 'Crafting':
-                  animation = iconAnimations.Hammer;
-                  break;
-                case 'Quality Check':
-                  animation = iconAnimations.CheckCircle;
-                  break;
-                case 'Delivery':
-                  animation = iconAnimations.Truck;
-                  break;
-                default:
-                  animation = { animate: {}, transition: {} };
-              }
+              const iconName = step.icon.name as keyof typeof iconAnimations;
+              const animation = iconAnimations[iconName];
 
               return (
                 <motion.div
