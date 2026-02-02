@@ -89,15 +89,16 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex justify-center"
+            className="flex flex-col sm:flex-row items-center gap-4"
           >
             <Link
               to="/products"
-              className="px-8 py-4 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-colors flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-colors flex items-center justify-center gap-2"
             >
               Explore Products
               <ArrowRight size={18} />
             </Link>
+           
           </motion.div>
         </div>
 
@@ -221,13 +222,12 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* CTA - Single Button */}
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20 flex justify-end w-full max-w-md"
-          
+          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20 flex items-center gap-6"
         >
           <Link
             to="/products"
@@ -235,6 +235,12 @@ const Hero = () => {
           >
             Explore Products
             <ArrowRight size={18} />
+          </Link>
+          <Link
+            to="/quote"
+            className="px-8 py-4 rounded-full bg-primary-foreground/90 text-charcoal font-semibold hover:bg-primary-foreground transition-all hover:scale-105 shadow-lg"
+          >
+            Request Quote
           </Link>
         </motion.div>
 

@@ -35,16 +35,8 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'py-3' : 'py-5'
+          isScrolled ? 'glass py-3' : 'py-5'
         }`}
-        style={{
-          background: isScrolled 
-            ? 'linear-gradient(90deg, rgba(168, 119, 73, 0.08) 0%, rgba(93, 111, 112, 0.08) 100%)'
-            : 'linear-gradient(90deg, rgba(168, 119, 73, 0.05) 0%, rgba(93, 111, 112, 0.05) 100%)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: isScrolled ? '1px solid rgba(168, 119, 73, 0.15)' : '1px solid rgba(168, 119, 73, 0.08)',
-        }}
       >
         <div className="container-custom flex items-center justify-between lg:justify-start lg:gap-12">
           {/* Logo */}
@@ -61,7 +53,7 @@ const Navbar = () => {
                 className={`text-sm font-medium transition-colors link-underline ${
                   location.pathname === link.path
                     ? 'text-accent'
-                    : 'text-white hover:text-accent'
+                    : 'text-foreground hover:text-accent'
                 }`}
               >
                 {link.name}
@@ -72,7 +64,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden relative z-10 p-2 text-white"
+            className="lg:hidden relative z-10 p-2 text-foreground"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -119,7 +111,7 @@ const Navbar = () => {
                       className={`text-xl font-medium block ${
                         location.pathname === link.path
                           ? 'text-accent'
-                          : 'text-white hover:text-accent'
+                          : 'text-foreground'
                       }`}
                     >
                       {link.name}

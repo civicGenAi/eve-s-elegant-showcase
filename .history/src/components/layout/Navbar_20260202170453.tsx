@@ -35,25 +35,17 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'py-3' : 'py-5'
+          isScrolled ? 'glass py-3' : 'bg-card/95 backdrop-blur-sm shadow-sm py-5'
         }`}
-        style={{
-          background: isScrolled 
-            ? 'linear-gradient(90deg, rgba(168, 119, 73, 0.08) 0%, rgba(93, 111, 112, 0.08) 100%)'
-            : 'linear-gradient(90deg, rgba(168, 119, 73, 0.05) 0%, rgba(93, 111, 112, 0.05) 100%)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: isScrolled ? '1px solid rgba(168, 119, 73, 0.15)' : '1px solid rgba(168, 119, 73, 0.08)',
-        }}
       >
-        <div className="container-custom flex items-center justify-between lg:justify-start lg:gap-12">
+        <div className="container-custom flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="relative z-10">
-            <img src={logoDark} alt="Eve Furniture" className="h-16 md:h-20 w-auto" />
+            <img src={logoDark} alt="Eve Furniture" className="h-12 md:h-14 w-auto" />
           </Link>
 
-          {/* Desktop Navigation - Centered */}
-          <div className="hidden lg:flex items-center gap-8 flex-1 justify-center">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -61,7 +53,7 @@ const Navbar = () => {
                 className={`text-sm font-medium transition-colors link-underline ${
                   location.pathname === link.path
                     ? 'text-accent'
-                    : 'text-white hover:text-accent'
+                    : 'text-foreground hover:text-accent'
                 }`}
               >
                 {link.name}
@@ -72,7 +64,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden relative z-10 p-2 text-white"
+            className="lg:hidden relative z-10 p-2 text-foreground"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -119,7 +111,7 @@ const Navbar = () => {
                       className={`text-xl font-medium block ${
                         location.pathname === link.path
                           ? 'text-accent'
-                          : 'text-white hover:text-accent'
+                          : 'text-foreground'
                       }`}
                     >
                       {link.name}

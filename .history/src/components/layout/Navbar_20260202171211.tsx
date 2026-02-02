@@ -61,7 +61,7 @@ const Navbar = () => {
                 className={`text-sm font-medium transition-colors link-underline ${
                   location.pathname === link.path
                     ? 'text-accent'
-                    : 'text-white hover:text-accent'
+                    : 'text-foreground hover:text-accent'
                 }`}
               >
                 {link.name}
@@ -72,7 +72,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden relative z-10 p-2 text-white"
+            className="lg:hidden relative z-10 p-2 text-foreground"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -119,7 +119,7 @@ const Navbar = () => {
                       className={`text-xl font-medium block ${
                         location.pathname === link.path
                           ? 'text-accent'
-                          : 'text-white hover:text-accent'
+                          : 'text-foreground'
                       }`}
                     >
                       {link.name}

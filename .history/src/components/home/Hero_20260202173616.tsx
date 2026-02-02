@@ -226,8 +226,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20 flex justify-end w-full max-w-md"
-          
+         
+          className="absolute bottom-16 ml-20 z-20"
+
         >
           <Link
             to="/products"
