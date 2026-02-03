@@ -14,6 +14,7 @@ import {
   CheckCircle,
   FileText
 } from 'lucide-react';
+import heroFinished from '@/assets/hero-finished.jpg';
 
 const furnitureTypes = [
   { id: 'dining-table', name: 'Dining Table', icon: '🍽️' },
@@ -188,13 +189,17 @@ const RequestQuote = () => {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="pt-32 pb-8 bg-secondary grain-overlay">
-        <div className="container-custom">
+      {/* Hero with Image */}
+      <section className="relative pt-24 pb-12 min-h-[40vh] flex items-center">
+        <div className="absolute inset-0">
+          <img src={heroFinished} alt="Quote" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/50" />
+        </div>
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-2xl mx-auto"
+            className="max-w-2xl"
           >
             <span className="text-sm uppercase tracking-[0.3em] text-accent mb-4 block">
               Get Started
