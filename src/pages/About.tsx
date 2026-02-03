@@ -21,7 +21,8 @@ import {
   Percent,
   Wallet,
   Banknote,
-  Package
+  Package,
+  ArrowRight
 } from 'lucide-react';
 import heroFinished from '@/assets/hero-finished.jpg';
 import heroWorkshop from '@/assets/hero-workshop.jpg';
@@ -37,22 +38,26 @@ const paymentMethods = [
   { 
     icon: Banknote, 
     title: 'Bank Transfer', 
-    description: 'Direct transfers to our business account - secure and traceable.' 
+    description: 'Direct transfers to our business account - secure and traceable.',
+    color: 'from-emerald-500 to-teal-600'
   },
   { 
     icon: Wallet, 
     title: 'Mobile Money', 
-    description: 'M-Pesa, Tigo Pesa, Airtel Money - instant and convenient.' 
+    description: 'M-Pesa, Tigo Pesa, Airtel Money - instant and convenient.',
+    color: 'from-orange-500 to-amber-600'
   },
   { 
     icon: CreditCard, 
     title: 'Card Payments', 
-    description: 'Credit and debit cards accepted for your convenience.' 
+    description: 'Credit and debit cards accepted for your convenience.',
+    color: 'from-blue-500 to-indigo-600'
   },
   { 
     icon: Percent, 
     title: 'Flexible Plans', 
-    description: 'Custom payment schedules available for large orders.' 
+    description: 'Custom payment schedules available for large orders.',
+    color: 'from-purple-500 to-pink-600'
   },
 ];
 
@@ -61,37 +66,43 @@ const deliveryRegions = [
     region: 'Dar es Salaam', 
     delivery: 'Free Delivery', 
     time: '2-3 Days',
-    icon: Package
+    icon: Package,
+    featured: true
   },
   { 
     region: 'Arusha & Moshi', 
     delivery: 'Standard Rates', 
     time: '5-7 Days',
-    icon: Truck
+    icon: Truck,
+    featured: false
   },
   { 
     region: 'Mwanza & Lake Zone', 
     delivery: 'Regional Rates', 
     time: '7-10 Days',
-    icon: Truck
+    icon: Truck,
+    featured: false
   },
   { 
     region: 'Dodoma & Central', 
     delivery: 'Regional Rates', 
     time: '5-7 Days',
-    icon: Truck
+    icon: Truck,
+    featured: false
   },
   { 
     region: 'Mbeya & Southern', 
     delivery: 'Regional Rates', 
     time: '7-10 Days',
-    icon: Truck
+    icon: Truck,
+    featured: false
   },
   { 
     region: 'Nationwide Coverage', 
     delivery: 'Custom Quotes', 
     time: 'Contact Us',
-    icon: MapPin
+    icon: MapPin,
+    featured: false
   },
 ];
 
@@ -113,23 +124,33 @@ const About = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-[#F8F6F3] grain-overlay">
-        <div className="container-custom">
+      {/* Hero Section with Image */}
+      <section className="relative pt-24 pb-20 min-h-[60vh] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src={heroWorkshop} 
+            alt="Workshop" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/50" />
+        </div>
+        
+        <div className="container-custom relative z-10">
           <motion.div
             ref={heroRef}
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
+            className="max-w-2xl"
           >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#A87749] mb-4 block">
+            <span className="text-sm uppercase tracking-[0.3em] text-accent mb-4 block">
               About Us
             </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#070809] mb-6">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-background mb-6">
               Crafting Dreams Into Reality
             </h1>
-            <p className="text-[#5D6F70] text-lg md:text-xl">
+            <p className="text-background/80 text-lg md:text-xl max-w-xl">
               For over 15 years, Eve Furniture has been transforming spaces across Tanzania with exceptional craftsmanship and timeless design.
             </p>
           </motion.div>
@@ -137,7 +158,7 @@ const About = () => {
       </section>
 
       {/* Story Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-background">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div
@@ -168,13 +189,13 @@ const About = () => {
               animate={storyInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="text-sm uppercase tracking-[0.3em] text-[#A87749] mb-4 block">
+              <span className="text-sm uppercase tracking-[0.3em] text-accent mb-4 block">
                 Our Story
               </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-[#070809] mb-6">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
                 A Legacy of Excellence
               </h2>
-              <div className="space-y-4 text-[#5D6F70] leading-relaxed">
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
                   Founded in 2009 by master craftsman James Mwakasege, Eve Furniture began as a small workshop with a big vision: to bring world-class furniture craftsmanship to East Africa.
                 </p>
@@ -191,7 +212,7 @@ const About = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-[#070809] text-white grain-overlay">
+      <section className="py-20 bg-foreground text-background grain-overlay">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12">
             <motion.div
@@ -201,11 +222,11 @@ const About = () => {
               transition={{ duration: 0.6 }}
               className="text-center md:text-left"
             >
-              <div className="w-16 h-16 rounded-full bg-[#A87749]/20 flex items-center justify-center mx-auto md:mx-0 mb-6">
-                <Target className="w-8 h-8 text-[#A87749]" />
+              <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto md:mx-0 mb-6">
+                <Target className="w-8 h-8 text-accent" />
               </div>
               <h3 className="font-display text-2xl font-bold mb-4">Our Mission</h3>
-              <p className="text-white/70 leading-relaxed">
+              <p className="text-background/70 leading-relaxed">
                 To create exceptional furniture that enhances lives and spaces, combining traditional craftsmanship with innovative design, while providing outstanding value and service to our clients.
               </p>
             </motion.div>
@@ -217,11 +238,11 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-center md:text-left"
             >
-              <div className="w-16 h-16 rounded-full bg-[#A87749]/20 flex items-center justify-center mx-auto md:mx-0 mb-6">
-                <Eye className="w-8 h-8 text-[#A87749]" />
+              <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto md:mx-0 mb-6">
+                <Eye className="w-8 h-8 text-accent" />
               </div>
               <h3 className="font-display text-2xl font-bold mb-4">Our Vision</h3>
-              <p className="text-white/70 leading-relaxed">
+              <p className="text-background/70 leading-relaxed">
                 To be East Africa's most trusted furniture brand, recognized for excellence in design, quality, and customer satisfaction, while nurturing the next generation of skilled craftsmen.
               </p>
             </motion.div>
@@ -230,7 +251,7 @@ const About = () => {
       </section>
 
       {/* Core Values */}
-      <section className="section-padding bg-[#F8F6F3] grain-overlay">
+      <section className="section-padding bg-secondary grain-overlay">
         <div className="container-custom">
           <motion.div
             ref={valuesRef}
@@ -239,10 +260,10 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#A87749] mb-4 block">
+            <span className="text-sm uppercase tracking-[0.3em] text-accent mb-4 block">
               What We Stand For
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#070809]">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
               Our Core Values
             </h2>
           </motion.div>
@@ -254,15 +275,15 @@ const About = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={valuesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-white hover:shadow-lg transition-shadow"
+                className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="w-14 h-14 rounded-xl bg-[#A87749]/10 flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="w-7 h-7 text-[#A87749]" />
+                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <value.icon className="w-7 h-7 text-accent" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-[#070809] mb-2">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
                   {value.title}
                 </h3>
-                <p className="text-[#5D6F70] text-sm">{value.description}</p>
+                <p className="text-muted-foreground text-sm">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -270,7 +291,7 @@ const About = () => {
       </section>
 
       {/* Payment Terms Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-background">
         <div className="container-custom">
           <motion.div
             ref={paymentRef}
@@ -279,13 +300,13 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#A87749] mb-4 block">
+            <span className="text-sm uppercase tracking-[0.3em] text-accent mb-4 block">
               Transparent & Flexible
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#070809] mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
               Payment Options
             </h2>
-            <p className="text-[#5D6F70] max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto">
               We offer multiple secure payment methods and flexible terms to make your furniture investment easy and convenient.
             </p>
           </motion.div>
@@ -297,15 +318,18 @@ const About = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={paymentInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-white border border-[#5D6F70]/10 hover:border-[#A87749]/30 hover:shadow-lg transition-all"
+                className="group relative text-center p-6 rounded-2xl bg-card border border-border hover:border-accent/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 overflow-hidden"
               >
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#A87749] to-[#5D6F70] flex items-center justify-center mx-auto mb-4">
-                  <method.icon className="w-7 h-7 text-white" />
+                {/* Gradient overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${method.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                
+                <div className={`relative z-10 w-14 h-14 rounded-xl bg-gradient-to-br ${method.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <method.icon className="w-7 h-7 text-background" />
                 </div>
-                <h3 className="font-display text-lg font-semibold text-[#070809] mb-2">
+                <h3 className="relative z-10 font-display text-lg font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
                   {method.title}
                 </h3>
-                <p className="text-[#5D6F70] text-sm">{method.description}</p>
+                <p className="relative z-10 text-muted-foreground text-sm">{method.description}</p>
               </motion.div>
             ))}
           </div>
@@ -315,27 +339,27 @@ const About = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={paymentInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-gradient-to-br from-[#A87749] to-[#5D6F70] rounded-2xl p-8 md:p-12 text-white"
+            className="bg-gradient-to-br from-accent to-primary rounded-2xl p-8 md:p-12 text-background"
           >
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                <Shield className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-background/20 flex items-center justify-center flex-shrink-0">
+                <Shield className="w-6 h-6 text-background" />
               </div>
               <div>
                 <h3 className="font-display text-2xl font-bold mb-2">Our Payment Terms</h3>
-                <p className="text-white/80 mb-6">
+                <p className="text-background/80 mb-6">
                   Fair, transparent, and designed to give you peace of mind throughout your project.
                 </p>
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
+              <div className="bg-background/10 rounded-xl p-6 backdrop-blur-sm">
                 <h4 className="font-semibold mb-3 flex items-center gap-2">
                   <Percent className="w-5 h-5" />
                   Standard Payment Plan
                 </h4>
-                <ul className="space-y-2 text-sm text-white/90">
+                <ul className="space-y-2 text-sm text-background/90">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
                     <span>25-50% deposit to begin production</span>
@@ -351,12 +375,12 @@ const About = () => {
                 </ul>
               </div>
 
-              <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
+              <div className="bg-background/10 rounded-xl p-6 backdrop-blur-sm">
                 <h4 className="font-semibold mb-3 flex items-center gap-2">
                   <Clock className="w-5 h-5" />
                   For Large Orders
                 </h4>
-                <ul className="space-y-2 text-sm text-white/90">
+                <ul className="space-y-2 text-sm text-background/90">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
                     <span>Custom payment schedules available</span>
@@ -377,7 +401,7 @@ const About = () => {
       </section>
 
       {/* Delivery Coverage Section */}
-      <section className="section-padding bg-[#F8F6F3] grain-overlay">
+      <section className="section-padding bg-secondary grain-overlay">
         <div className="container-custom">
           <motion.div
             ref={deliveryRef}
@@ -386,13 +410,13 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#A87749] mb-4 block">
+            <span className="text-sm uppercase tracking-[0.3em] text-accent mb-4 block">
               Nationwide Service
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#070809] mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
               Delivery Across Tanzania
             </h2>
-            <p className="text-[#5D6F70] max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto">
               We deliver high-quality furniture to every corner of Tanzania with professional handling and secure transport.
             </p>
           </motion.div>
@@ -404,28 +428,52 @@ const About = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={deliveryInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 hover:shadow-lg transition-shadow border border-[#5D6F70]/10"
+                className={`group relative rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 overflow-hidden ${
+                  region.featured 
+                    ? 'bg-gradient-to-br from-accent to-primary text-background shadow-lg hover:shadow-2xl' 
+                    : 'bg-card border border-border hover:border-accent/50 hover:shadow-xl'
+                }`}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#A87749]/10 flex items-center justify-center">
-                    <region.icon className="w-6 h-6 text-[#A87749]" />
+                {/* Animated background effect */}
+                <div className={`absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${region.featured ? 'hidden' : ''}`} />
+                
+                <div className="relative z-10 flex items-start justify-between mb-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 ${
+                    region.featured ? 'bg-background/20' : 'bg-accent/10'
+                  }`}>
+                    <region.icon className={`w-6 h-6 ${region.featured ? 'text-background' : 'text-accent'}`} />
                   </div>
-                  {region.delivery === 'Free Delivery' && (
-                    <span className="text-xs bg-[#A87749] text-white px-3 py-1 rounded-full font-semibold">
+                  {region.featured && (
+                    <span className="text-xs bg-background text-accent px-3 py-1 rounded-full font-bold uppercase tracking-wide">
                       FREE
                     </span>
                   )}
                 </div>
-                <h3 className="font-display text-lg font-semibold text-[#070809] mb-2">
+                
+                <h3 className={`font-display text-lg font-semibold mb-3 ${region.featured ? 'text-background' : 'text-foreground'}`}>
                   {region.region}
                 </h3>
-                <div className="space-y-1 text-sm">
-                  <p className="text-[#5D6F70]">
-                    <span className="font-medium text-[#070809]">Delivery:</span> {region.delivery}
-                  </p>
-                  <p className="text-[#5D6F70]">
-                    <span className="font-medium text-[#070809]">Timeline:</span> {region.time}
-                  </p>
+                
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Truck className={`w-4 h-4 ${region.featured ? 'text-background/80' : 'text-accent'}`} />
+                    <span className={region.featured ? 'text-background/90' : 'text-muted-foreground'}>
+                      {region.delivery}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className={`w-4 h-4 ${region.featured ? 'text-background/80' : 'text-accent'}`} />
+                    <span className={region.featured ? 'text-background/90' : 'text-muted-foreground'}>
+                      {region.time}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Hover arrow */}
+                <div className={`mt-4 flex items-center gap-1 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-[-10px] group-hover:translate-x-0 ${
+                  region.featured ? 'text-background' : 'text-accent'
+                }`}>
+                  Learn more <ArrowRight className="w-4 h-4" />
                 </div>
               </motion.div>
             ))}
@@ -437,31 +485,31 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 bg-white rounded-2xl p-8 md:p-10 border-2 border-[#A87749]/20"
+            className="mt-12 bg-card rounded-2xl p-8 md:p-10 border-2 border-accent/20 hover:border-accent/40 transition-colors"
           >
             <div className="flex flex-col md:flex-row items-start gap-6">
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#A87749] to-[#5D6F70] flex items-center justify-center flex-shrink-0">
-                <Truck className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center flex-shrink-0">
+                <Truck className="w-8 h-8 text-background" />
               </div>
               <div className="flex-1">
-                <h3 className="font-display text-2xl font-bold text-[#070809] mb-3">
+                <h3 className="font-display text-2xl font-bold text-foreground mb-3">
                   Our Delivery Guarantee
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4 text-[#5D6F70]">
+                <div className="grid md:grid-cols-2 gap-4 text-muted-foreground">
                   <div className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-[#A87749] flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                     <span>Professional movers and handlers</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-[#A87749] flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                     <span>Secure packaging for protection</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-[#A87749] flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                     <span>Real-time delivery tracking</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-[#A87749] flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                     <span>Installation services available</span>
                   </div>
                 </div>
@@ -472,7 +520,7 @@ const About = () => {
       </section>
 
       {/* Process Timeline */}
-      <section className="py-20 bg-[#070809] text-white grain-overlay">
+      <section className="py-20 bg-foreground text-background grain-overlay">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -481,7 +529,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <span className="text-sm uppercase tracking-[0.3em] text-[#A87749] mb-4 block">
+            <span className="text-sm uppercase tracking-[0.3em] text-accent mb-4 block">
               From Concept to Completion
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold">
@@ -499,13 +547,10 @@ const About = () => {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="flex flex-col items-center"
               >
-                <div className="w-16 h-16 rounded-full bg-[#A87749]/20 flex items-center justify-center mb-2">
-                  <step.icon className="w-7 h-7 text-[#A87749]" />
+                <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mb-2 hover:bg-accent/30 transition-colors">
+                  <step.icon className="w-7 h-7 text-accent" />
                 </div>
                 <span className="text-sm font-medium">{step.title}</span>
-                {index < processSteps.length - 1 && (
-                  <div className="hidden md:block absolute right-0 top-1/2 w-8 h-0.5 bg-[#A87749]/30" />
-                )}
               </motion.div>
             ))}
           </div>
