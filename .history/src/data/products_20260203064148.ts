@@ -50,7 +50,8 @@ export const products: Product[] = [
     priceRange: 'From TZS 1,600,000',
     priceValue: 1600000,
     gallery: [
-      '/assets/lv/tv.jpg',
+      '/assets/tv-stand.jpg',
+      '/assets/tv-stand-2.jpg',
     ],
   },
   {
