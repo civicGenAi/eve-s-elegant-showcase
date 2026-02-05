@@ -6,33 +6,95 @@ import Layout from '@/components/layout/Layout';
 import { categories, subcategories } from '@/data/products';
 import { Sparkles, Award, Clock, Shield, ArrowRight } from 'lucide-react';
 
-// Import product images
-import productDiningTable from '@/assets/product-dining-table.jpg';
-import productChair from '@/assets/product-chair.jpg';
-import productCabinet from '@/assets/product-cabinet.jpg';
-import productCoffeeTable from '@/assets/product-coffee-table.jpg';
-import productSofa from '@/assets/product-sofa.jpg';
-import productWardrobe from '@/assets/product-wardrobe.jpg';
-import heroFinished from '@/assets/hero-finished.jpg';
+// Subcategory-specific images mapping
+const subcategoryImages: Record<string, string> = {
+  // Living Room
+  'TV Stands & Media Consoles': '/assets/lv/tv.jpg',
+  'Coffee Tables': '/assets/lv/cof.jpg',
+  'Sleeper Sofas & Futons': '/assets/lv/sleeper-sofa.jpg',
+  'Sectionals': '/assets/lv/section.jpg',
+  'Sofas': '/assets/lv/sofa.jpg',
+  'Living Room Sets': '/assets/lv/living-set.jpg',
+  'End & Side Tables': '/assets/lv/endsidetbl.jpg',
+  'Accent Chairs & Recliners': '/assets/lv/accent.jpg',
+  'Cabinets & Chests': '/assets/lv/cabinet.jpg',
+  'Ottomans & Benches': '/assets/lv/ottomans.jpg',
+  
+  // Kitchen & Dining
+  'Dining Tables': '/assets/lv/dining-table.jpg',
+  'Dining Chairs & Benches': '/assets/lv/dining-chairs.jpg',
+  'Kitchen Island & Carts': '/assets/lv/kitchen-island.jpg',
+  'Dining Sets': '/assets/lv/dining-set.jpg',
+  'Sideboards & Buffets': '/assets/lv/sideboard.jpg',
+  'Bar Stools & Counter Stools': '/assets/lv/bar-stools.jpg',
+  'Bar Tables': '/assets/lv/bar-table.jpg',
+  'Wine Cabinets & Racks': '/assets/lv/wine-cabinet.jpg',
+  'Display Cabinets': '/assets/lv/display-cabinet.jpg',
+  
+  // Bedroom
+  'Beds': '/assets/lv/bed.jpg',
+  'Nightstands': '/assets/lv/nightstand.jpg',
+  'Makeup Vanities': '/assets/lv/vanity.jpg',
+  'Dressers & Chests': '/assets/lv/dresser.jpg',
+  'Bedroom Sets': '/assets/lv/bedroom-set.jpg',
+  'Vanity Stools': '/assets/lv/vanity-stool.jpg',
+  'Bedroom Benches': '/assets/lv/ottomans.jpg',
+  'Armoires & Wardrobes': '/assets/lv/wardrobe.jpg',
+  'Clothes & Garment Racks': '/assets/lv/garment-rack.jpg',
+  
+  // Office
+  'Desks': '/assets/lv/desk.jpg',
+  'Office Chairs': '/assets/lv/office-chair.jpg',
+  'Bookshelves & Bookcases': '/assets/lv/bookshelf.jpg',
+  'Desk & Chair Sets': '/assets/lv/desk.jpg',
+  
+  // Entryway
+  'Console Tables': '/assets/lv/console-table.jpg',
+  'Entryway Benches': '/assets/lv/entryway-bench.jpg',
+  'Shoe Storage': '/assets/lv/shoe-storage.jpg',
+  'Coat Racks & Hall Trees': '/assets/lv/coat-rack.jpg',
+  'Umbrella Stands': '/assets/lv/console-table.jpg',
+  
+  // Baby & Kids
+  'Cribs': '/assets/lv/crib.jpg',
+  'Kids Beds': '/assets/lv/kids-bed.jpg',
+  'Kids Desks': '/assets/lv/kids-desk.jpg',
+  'Kids Storage': '/assets/lv/kids-storage.jpg',
+  'Kids Chairs': '/assets/lv/kids-desk.jpg',
+  
+  // Inspiration
+  'Living Room': '/assets/lv/livingr.jpg',
+  'Dining Room': '/assets/lv/dining-table.jpg',
+  'Bedroom': '/assets/lv/sleep.jpg',
+  'Home Office': '/assets/lv/desk.jpg',
+  'Home Bar': '/assets/lv/bar-table.jpg',
+  'Free Design Services': '/assets/lv/livingr.jpg',
+};
+
+// Category fallback images
+const categoryImages: Record<string, string> = {
+  'Living Room': '/assets/lv/livingr.jpg',
+  'Kitchen & Dining': '/assets/lv/dining-table.jpg',
+  'Bedroom': '/assets/lv/sleep.jpg',
+  'Office': '/assets/lv/desk.jpg',
+  'Entryway': '/assets/lv/console-table.jpg',
+  'Baby & Kids': '/assets/lv/crib.jpg',
+  'Inspiration': '/assets/lv/livingr.jpg',
+};
+
+// Get image for a subcategory with fallback to category
+const getSubcategoryImage = (category: string, subcategory: string): string => {
+  return subcategoryImages[subcategory] || categoryImages[category] || '/assets/lv/livingr.jpg';
+};
 
 // Hero carousel images and messages
 const heroSlides = [
-  { image: heroFinished, text: 'Crafted for Excellence' },
-  { image: productSofa, text: 'Beyond Expectations' },
-  { image: productDiningTable, text: 'Free Consultation' },
-  { image: productChair, text: 'Quality Guaranteed' },
-  { image: productCabinet, text: 'Timeless Design' },
+  { image: '/assets/lv/livingr.jpg', text: 'Crafted for Excellence' },
+  { image: '/assets/lv/sofa.jpg', text: 'Beyond Expectations' },
+  { image: '/assets/lv/dining-table.jpg', text: 'Free Consultation' },
+  { image: '/assets/lv/bedroom-set.jpg', text: 'Quality Guaranteed' },
+  { image: '/assets/lv/cabinet.jpg', text: 'Timeless Design' },
 ];
-
-// Category images
-const categoryImages: Record<string, string> = {
-  'Living Room': productSofa,
-  'Kitchen & Dining': productDiningTable,
-  'Bedroom': productWardrobe,
-  'Office': productCabinet,
-  'Entryway': productCoffeeTable,
-  'Baby & Kids': productChair,
-};
 
 const Products = () => {
   const navigate = useNavigate();
@@ -227,7 +289,7 @@ const Products = () => {
                         >
                           <div className="relative aspect-square rounded-2xl overflow-hidden bg-secondary mb-4">
                             <img
-                              src={categoryImages[category]}
+                              src={getSubcategoryImage(category, subcategory)}
                               alt={subcategory}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             />
@@ -274,7 +336,7 @@ const Products = () => {
                     >
                       <div className="relative aspect-square rounded-2xl overflow-hidden bg-secondary mb-4">
                         <img
-                          src={categoryImages[activeCategory]}
+                          src={getSubcategoryImage(activeCategory, subcategory)}
                           alt={subcategory}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
