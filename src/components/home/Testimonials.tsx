@@ -63,12 +63,19 @@ const Testimonials = () => {
 
         <div className="max-w-4xl mx-auto relative">
           {/* Quote Icon */}
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
+          <div className="hidden md:flex absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-accent/10 items-center justify-center">
             <Quote className="w-8 h-8 text-accent" />
           </div>
 
+          {/* Mobile Quote Icon - inline */}
+          <div className="flex md:hidden items-center justify-center mb-6">
+            <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+              <Quote className="w-6 h-6 text-accent" />
+            </div>
+          </div>
+
           {/* Testimonial Cards */}
-          <div className="relative min-h-[300px] flex items-center justify-center px-4">
+          <div className="relative min-h-[250px] md:min-h-[300px] flex items-center justify-center px-2 md:px-4">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}
@@ -76,26 +83,26 @@ const Testimonials = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.5 }}
-                className="text-center"
+                className="text-center w-full"
               >
                 {/* Stars */}
-                <div className="flex items-center justify-center gap-1 mb-6">
+                <div className="flex items-center justify-center gap-1 mb-4 md:mb-6">
                   {[...Array(testimonials[current].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+                    <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-accent text-accent" />
                   ))}
                 </div>
 
                 {/* Content */}
-                <p className="font-display text-xl md:text-2xl text-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
+                <p className="font-display text-base sm:text-lg md:text-2xl text-foreground leading-relaxed mb-5 md:mb-8 max-w-2xl mx-auto px-2">
                   "{testimonials[current].content}"
                 </p>
 
                 {/* Author */}
                 <div>
-                  <p className="font-semibold text-foreground text-lg">
+                  <p className="font-semibold text-foreground text-base md:text-lg">
                     {testimonials[current].name}
                   </p>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground text-sm md:text-base">
                     {testimonials[current].role}
                   </p>
                 </div>
@@ -104,13 +111,14 @@ const Testimonials = () => {
           </div>
 
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center justify-center gap-3 md:gap-4 mt-6 md:mt-8">
             <button
               onClick={prev}
-              className="p-3 rounded-full border border-border hover:border-accent hover:bg-accent/10 transition-colors"
+              className="p-2 md:p-3 rounded-full border border-border hover:border-accent hover:bg-accent/10 transition-colors"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={18} className="md:hidden" />
+              <ChevronLeft size={20} className="hidden md:block" />
             </button>
 
             {/* Dots */}
@@ -119,8 +127,8 @@ const Testimonials = () => {
                 <button
                   key={index}
                   onClick={() => setCurrent(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    current === index ? 'w-8 bg-accent' : 'bg-border hover:bg-accent/50'
+                  className={`h-2 rounded-full transition-all ${
+                    current === index ? 'w-6 md:w-8 bg-accent' : 'w-2 bg-border hover:bg-accent/50'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -129,10 +137,11 @@ const Testimonials = () => {
 
             <button
               onClick={next}
-              className="p-3 rounded-full border border-border hover:border-accent hover:bg-accent/10 transition-colors"
+              className="p-2 md:p-3 rounded-full border border-border hover:border-accent hover:bg-accent/10 transition-colors"
               aria-label="Next testimonial"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={18} className="md:hidden" />
+              <ChevronRight size={20} className="hidden md:block" />
             </button>
           </div>
         </div>

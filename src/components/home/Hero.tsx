@@ -4,11 +4,17 @@ import { Link } from 'react-router-dom';
 import { ChevronDown, ArrowRight, GripVertical } from 'lucide-react';
 import heroFinished from '@/assets/hero-finished.jpg';
 import heroWorkshop from '@/assets/hero-workshop.jpg';
+import productSofa from '@/assets/product-sofa.jpg';
+import productDiningTable from '@/assets/product-dining-table.jpg';
+import productCabinet from '@/assets/product-cabinet.jpg';
 
 const morphWords = ['CRAFT', 'QUALITY', 'ELEGANCE', 'TIMELESS'];
 
+const heroSlides = [heroFinished, heroWorkshop, productSofa, productDiningTable, productCabinet];
+
 const Hero = () => {
   const [currentWord, setCurrentWord] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,6 +24,14 @@ const Hero = () => {
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % morphWords.length);
     }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Background slideshow for mobile
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -41,13 +55,34 @@ const Hero = () => {
     <section className="relative min-h-screen overflow-hidden">
       {/* Mobile Hero - Text Morphing */}
       <div className="md:hidden relative min-h-screen flex flex-col items-center justify-center px-6 grain-overlay">
-        {/* Background Images */}
-        <div className="absolute inset-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-20 blur-sm"
-            style={{ backgroundImage: `url(${heroFinished})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+        {/* Animated Background Slideshow */}
+        <div className="absolute inset-0 overflow-hidden">
+          <AnimatePresence mode="sync">
+            {heroSlides.map((slide, index) => (
+              index === currentSlide && (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{
+                    opacity: 0.45,
+                    scale: 1.2,
+                    x: index % 2 === 0 ? [0, -15] : [0, 15],
+                    y: index % 3 === 0 ? [0, -10] : [0, 10],
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    opacity: { duration: 1.2 },
+                    scale: { duration: 5, ease: 'linear' },
+                    x: { duration: 5, ease: 'linear' },
+                    y: { duration: 5, ease: 'linear' },
+                  }}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${slide})` }}
+                />
+              )
+            ))}
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/80" />
         </div>
 
         {/* Content */}
@@ -55,7 +90,7 @@ const Hero = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-4"
+            className="text-sm uppercase tracking-[0.3em] text-white/70 mb-4"
           >
             Evo Furniture Ltd
           </motion.p>
@@ -69,7 +104,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 exit={{ opacity: 0, y: -40, rotateX: 45 }}
                 transition={{ duration: 0.5 }}
-                className="font-display text-6xl sm:text-7xl font-bold text-foreground"
+                className="font-display text-6xl sm:text-7xl font-bold text-white"
               >
                 {morphWords[currentWord]}
               </motion.h1>
@@ -80,7 +115,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-muted-foreground text-lg max-w-sm mx-auto mt-4 mb-8"
+            className="text-white/80 text-lg max-w-sm mx-auto mt-4 mb-8"
           >
             Transforming spaces with furniture that tells your story
           </motion.p>
@@ -111,7 +146,7 @@ const Hero = () => {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 text-muted-foreground"
+            className="flex flex-col items-center gap-2 text-white/60"
           >
             <span className="text-xs uppercase tracking-widest">Scroll</span>
             <ChevronDown size={20} />
