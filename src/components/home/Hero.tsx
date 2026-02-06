@@ -54,7 +54,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Mobile Hero - Text Morphing */}
-      <div className="md:hidden relative min-h-screen flex flex-col items-center justify-center px-6 grain-overlay">
+      <div className="md:hidden relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-20 grain-overlay">
         {/* Animated Background Slideshow */}
         <div className="absolute inset-0 overflow-hidden">
           <AnimatePresence mode="sync">

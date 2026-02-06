@@ -17,14 +17,14 @@ import {
 import heroFinished from '@/assets/hero-finished.jpg';
 
 const furnitureTypes = [
-  { id: 'dining-table', name: 'Dining Table', icon: '🍽️' },
-  { id: 'coffee-table', name: 'Coffee Table', icon: '☕' },
-  { id: 'chairs', name: 'Chairs', icon: '🪑' },
-  { id: 'sofa', name: 'Sofa', icon: '🛋️' },
-  { id: 'cabinet', name: 'Cabinet', icon: '🗄️' },
-  { id: 'wardrobe', name: 'Wardrobe', icon: '👔' },
-  { id: 'bed', name: 'Bed Frame', icon: '🛏️' },
-  { id: 'custom', name: 'Custom Design', icon: '✨' },
+  { id: 'dining-table', name: 'Dining Table', image: '/assets/lv/dining-table.jpg' },
+  { id: 'coffee-table', name: 'Coffee Table', image: '/assets/lv/cof.jpg' },
+  { id: 'chairs', name: 'Chairs', image: '/assets/lv/dining-chairs.jpg' },
+  { id: 'sofa', name: 'Sofa', image: '/assets/lv/sofa.jpg' },
+  { id: 'cabinet', name: 'Cabinet', image: '/assets/lv/cabinet.jpg' },
+  { id: 'wardrobe', name: 'Wardrobe', image: '/assets/lv/wardrobe.jpg' },
+  { id: 'bed', name: 'Bed Frame', image: '/assets/lv/bed.jpg' },
+  { id: 'custom', name: 'Custom Design', image: '/assets/lv/livingr.jpg' },
 ];
 
 const materials = ['Wood', 'Metal', 'Glass', 'Fabric', 'Leather'];
@@ -125,7 +125,7 @@ const RequestQuote = () => {
 
   const openWhatsApp = () => {
     const message = `Hi Eve Furniture! I just submitted a quote request (Ref: ${referenceNumber}). I'd like to discuss my project.`;
-    window.open(`https://wa.me/255123456789?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/255655588777?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   if (isSubmitted) {
@@ -282,14 +282,32 @@ const RequestQuote = () => {
                                 : [...current, type.id];
                               field.onChange(updated);
                             }}
-                            className={`p-6 rounded-2xl border-2 transition-all ${
+                            className={`relative rounded-2xl border-2 overflow-hidden transition-all ${
                               field.value?.includes(type.id)
-                                ? 'border-accent bg-accent/10'
+                                ? 'border-accent ring-2 ring-accent/30'
                                 : 'border-border hover:border-accent/50'
                             }`}
                           >
-                            <span className="text-4xl mb-3 block">{type.icon}</span>
-                            <span className="font-medium text-foreground">{type.name}</span>
+                            <div className="aspect-square">
+                              <img
+                                src={type.image}
+                                alt={type.name}
+                                className="w-full h-full object-cover"
+                              />
+                              <div className={`absolute inset-0 transition-all ${
+                                field.value?.includes(type.id)
+                                  ? 'bg-accent/20'
+                                  : 'bg-gradient-to-t from-foreground/70 to-transparent'
+                              }`} />
+                              {field.value?.includes(type.id) && (
+                                <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-accent flex items-center justify-center">
+                                  <Check size={14} className="text-accent-foreground" />
+                                </div>
+                              )}
+                            </div>
+                            <div className="p-3 bg-card">
+                              <span className="font-medium text-foreground text-sm">{type.name}</span>
+                            </div>
                           </button>
                         ))}
                       </div>
@@ -745,7 +763,7 @@ const RequestQuote = () => {
                 type="button"
                 onClick={() => {
                   window.open(
-                    `https://wa.me/255123456789?text=${encodeURIComponent("Hi Eve Furniture! I'd like to request a quote for custom furniture.")}`,
+                    `https://wa.me/255655588777?text=${encodeURIComponent("Hi Eve Furniture! I'd like to request a quote for custom furniture.")}`,
                     '_blank'
                   );
                 }}
