@@ -104,9 +104,14 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="absolute right-0 top-0 bottom-0 w-[80%] max-w-sm bg-card p-8 pt-24"
+              className="absolute right-0 top-0 bottom-0 w-[80%] max-w-sm p-8 pt-24 border-l border-white/10"
+              style={{
+                background: 'linear-gradient(180deg, rgba(20, 20, 20, 0.98) 0%, rgba(30, 30, 30, 0.98) 100%)',
+                backdropFilter: 'blur(24px)',
+                WebkitBackdropFilter: 'blur(24px)',
+              }}
             >
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-1">
                 {navLinks.map((link, index) => (
                   <motion.div
                     key={link.path}
@@ -116,16 +121,21 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.path}
-                      className={`text-xl font-medium block ${
+                      className={`text-xl font-medium block py-3 px-4 rounded-lg transition-colors ${
                         location.pathname === link.path
-                          ? 'text-accent'
-                          : 'text-white hover:text-accent'
+                          ? 'text-accent bg-white/10'
+                          : 'text-white/90 hover:text-accent hover:bg-white/5'
                       }`}
                     >
                       {link.name}
                     </Link>
                   </motion.div>
                 ))}
+              </div>
+
+              {/* Decorative accent line */}
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <p className="text-white/40 text-sm">Evo Furniture Ltd</p>
               </div>
             </motion.div>
           </motion.div>
