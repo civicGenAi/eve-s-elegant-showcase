@@ -52,7 +52,7 @@ const Contact = () => {
 
   const openWhatsApp = () => {
     window.open(
-      `https://wa.me/255123456789?text=${encodeURIComponent("Hi Eve Furniture! I'd like to inquire about your services.")}`,
+      `https://wa.me/255655588777?text=${encodeURIComponent("Hi Eve Furniture! I'd like to inquire about your services.")}`,
       '_blank'
     );
   };
@@ -268,12 +268,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="font-medium text-foreground">Phone</p>
-                      <a href="tel:+255123456789" className="text-muted-foreground text-sm hover:text-accent">
-                        +255 123 456 789
-                      </a>
-                      <br />
-                      <a href="tel:+255987654321" className="text-muted-foreground text-sm hover:text-accent">
-                        +255 987 654 321
+                      <a href="tel:+255655588777" className="text-muted-foreground text-sm hover:text-accent">
+                        +255 655 588 777
                       </a>
                     </div>
                   </div>
@@ -284,8 +280,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="font-medium text-foreground">Email</p>
-                      <a href="mailto:info@evefurniture.co.tz" className="text-muted-foreground text-sm hover:text-accent">
-                        info@evefurniture.co.tz
+                      <a href="mailto:oscarshayo@hotmail.com" className="text-muted-foreground text-sm hover:text-accent">
+                        oscarshayo@hotmail.com
                       </a>
                     </div>
                   </div>

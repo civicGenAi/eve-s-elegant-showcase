@@ -25,7 +25,7 @@ const WhatsAppButton = () => {
 
   const openWhatsApp = () => {
     window.open(
-      `https://wa.me/255123456789?text=${encodeURIComponent("Hi Eve Furniture! I'd like to inquire about your products.")}`,
+      `https://wa.me/255655588777?text=${encodeURIComponent("Hi Eve Furniture! I'd like to inquire about your products.")}`,
       '_blank'
     );
   };

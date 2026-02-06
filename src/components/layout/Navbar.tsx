@@ -104,7 +104,7 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="absolute right-0 top-0 bottom-0 w-[80%] max-w-sm p-8 pt-24 border-l border-white/10"
+              className="absolute right-0 top-0 bottom-0 w-[80%] max-w-sm p-8 pt-32 border-l border-white/10"
               style={{
                 background: 'linear-gradient(180deg, rgba(20, 20, 20, 0.98) 0%, rgba(30, 30, 30, 0.98) 100%)',
                 backdropFilter: 'blur(24px)',

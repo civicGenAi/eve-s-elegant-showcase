@@ -257,8 +257,8 @@ const PrivacyPolicy = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5" />
-              <a href="mailto:info@evofurniturelimited.com" className="hover:underline">
-                info@evofurniturelimited.com
+              <a href="mailto:oscarshayo@hotmail.com" className="hover:underline">
+                oscarshayo@hotmail.com
               </a>
             </div>
             <div className="flex items-center gap-3">

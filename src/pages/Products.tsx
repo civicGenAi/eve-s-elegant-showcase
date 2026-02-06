@@ -256,8 +256,8 @@ const Products = () => {
           {!activeCategory && (
             <motion.div
               ref={ref}
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
               className="space-y-16"
             >
               {mainCategories.map((category, categoryIndex) => (

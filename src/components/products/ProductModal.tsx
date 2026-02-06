@@ -96,7 +96,7 @@ const ProductModal = ({ product, onClose }: ProductModalProps) => {
 
   const openWhatsApp = () => {
     const message = `Hi Eve Furniture! I'm interested in the ${product.name}. Can we discuss the details?\n\nProduct: ${product.name}\nPrice: ${product.priceRange}\nDimensions: ${product.dimensions}`;
-    window.open(`https://wa.me/255123456789?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/255655588777?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const copyLink = () => {
