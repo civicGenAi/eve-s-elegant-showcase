@@ -1,35 +1,86 @@
- import { motion } from 'framer-motion';
- import { useInView } from 'react-intersection-observer';
- import { Link } from 'react-router-dom';
- import { ArrowRight } from 'lucide-react';
- import { products } from '@/data/products';
- import { useMemo, useState } from 'react';
- 
- // Get featured products from each category
- const getFeaturedByCategory = () => {
-   const categories = ['Living Room', 'Kitchen & Dining', 'Bedroom', 'Office', 'Entryway', 'Baby & Kids'];
-   const featured: typeof products = [];
-   
-   categories.forEach(category => {
-     const categoryProducts = products.filter(p => p.category === category);
-     // Take 2-3 products from each category
-     featured.push(...categoryProducts.slice(0, 2));
-   });
-   
-   return featured;
- };
- 
- const FeaturedProducts = () => {
-   const [ref, inView] = useInView({
-     triggerOnce: true,
-     threshold: 0.1,
-   });
-   
-   const [isPaused, setIsPaused] = useState(false);
-   
-   const featuredProducts = useMemo(() => getFeaturedByCategory(), []);
-   // Duplicate for seamless loop
-   const duplicatedProducts = [...featuredProducts, ...featuredProducts];
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { products, Product } from '@/data/products';
+import { useMemo, useState } from 'react';
+
+// Subcategory to image mapping using actual /assets/lv/ images
+const subcategoryImageMap: Record<string, string> = {
+  // Living Room
+  'TV Stands & Media Consoles': '/assets/lv/tv.jpg',
+  'Coffee Tables': '/assets/lv/cof.jpg',
+  'Sectionals': '/assets/lv/section.jpg',
+  'Sofas': '/assets/lv/sofa.jpg',
+  'End & Side Tables': '/assets/lv/endsidetbl.jpg',
+  'Accent Chairs & Recliners': '/assets/lv/accent.jpg',
+  'Cabinets & Chests': '/assets/lv/cabinet.jpg',
+  'Ottomans & Benches': '/assets/lv/ottomans.jpg',
+  // Kitchen & Dining
+  'Dining Tables': '/assets/lv/dining-table.jpg',
+  'Dining Chairs & Benches': '/assets/lv/dining-chairs.jpg',
+  'Bar Stools & Counter Stools': '/assets/lv/bar-stools.jpg',
+  'Dining Sets': '/assets/lv/dining-set.jpg',
+  'Kitchen Islands & Carts': '/assets/lv/kitchen-island.jpg',
+  'Sideboards & Buffets': '/assets/lv/sideboard.jpg',
+  'Display Cabinets': '/assets/lv/display-cabinet.jpg',
+  'Bar Tables': '/assets/lv/bar-table.jpg',
+  'Wine & Bar Cabinets': '/assets/lv/wine-cabinet.jpg',
+  // Bedroom
+  'Beds & Headboards': '/assets/lv/bed.jpg',
+  'Bedroom Sets': '/assets/lv/bedroom-set.jpg',
+  'Dressers': '/assets/lv/dresser.jpg',
+  'Nightstands': '/assets/lv/nightstand.jpg',
+  'Wardrobes & Armoires': '/assets/lv/wardrobe.jpg',
+  'Vanities': '/assets/lv/vanity.jpg',
+  'Vanity Stools': '/assets/lv/vanity-stool.jpg',
+  // Office
+  'Desks': '/assets/lv/desk.jpg',
+  'Office Chairs': '/assets/lv/office-chair.jpg',
+  'Bookcases & Shelving': '/assets/lv/bookshelf.jpg',
+  // Entryway
+  'Console Tables': '/assets/lv/console-table.jpg',
+  'Entryway Benches': '/assets/lv/entryway-bench.jpg',
+  'Coat Racks & Hall Trees': '/assets/lv/coat-rack.jpg',
+  'Shoe Storage': '/assets/lv/shoe-storage.jpg',
+  'Garment Racks': '/assets/lv/garment-rack.jpg',
+  // Baby & Kids
+  'Cribs & Toddler Beds': '/assets/lv/crib.jpg',
+  'Kids Beds': '/assets/lv/kids-bed.jpg',
+  'Kids Desks & Chairs': '/assets/lv/kids-desk.jpg',
+  'Kids Storage': '/assets/lv/kids-storage.jpg',
+};
+
+// Get the correct image for a product
+const getProductImage = (product: Product): string => {
+  return subcategoryImageMap[product.subcategory] || '/assets/lv/livingr.jpg';
+};
+
+// Get featured products from each category
+const getFeaturedByCategory = () => {
+  const categories = ['Living Room', 'Kitchen & Dining', 'Bedroom', 'Office', 'Entryway', 'Baby & Kids'];
+  const featured: typeof products = [];
+  
+  categories.forEach(category => {
+    const categoryProducts = products.filter(p => p.category === category);
+    // Take 2-3 products from each category
+    featured.push(...categoryProducts.slice(0, 2));
+  });
+  
+  return featured;
+};
+
+const FeaturedProducts = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  const [isPaused, setIsPaused] = useState(false);
+  
+  const featuredProducts = useMemo(() => getFeaturedByCategory(), []);
+  // Duplicate for seamless loop
+  const duplicatedProducts = [...featuredProducts, ...featuredProducts];
  
    return (
      <section className="section-padding overflow-hidden">
@@ -93,11 +144,11 @@
                className="group flex-shrink-0 w-[280px] md:w-[320px]"
              >
                {/* Image Container */}
-               <div className="relative aspect-square rounded-2xl overflow-hidden bg-secondary mb-4">
-                 <img
-                   src={product.gallery[0] || '/placeholder.svg'}
-                   alt={product.name}
-                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                <div className="relative aspect-square rounded-2xl overflow-hidden bg-secondary mb-4">
+                  <img
+                    src={getProductImage(product)}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                  />
                  
                  {/* Overlay */}
