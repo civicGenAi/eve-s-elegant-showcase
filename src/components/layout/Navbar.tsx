@@ -38,12 +38,12 @@ const Navbar = () => {
           isScrolled ? 'py-3' : 'py-5'
         }`}
         style={{
-          background: isScrolled 
-            ? 'linear-gradient(90deg, rgba(168, 119, 73, 0.08) 0%, rgba(93, 111, 112, 0.08) 100%)'
-            : 'linear-gradient(90deg, rgba(168, 119, 73, 0.05) 0%, rgba(93, 111, 112, 0.05) 100%)',
+          background: isScrolled
+            ? 'linear-gradient(90deg, rgba(26, 26, 26, 0.92) 0%, rgba(35, 40, 42, 0.92) 100%)'
+            : 'linear-gradient(90deg, rgba(26, 26, 26, 0.75) 0%, rgba(35, 40, 42, 0.75) 100%)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: isScrolled ? '1px solid rgba(168, 119, 73, 0.15)' : '1px solid rgba(168, 119, 73, 0.08)',
+          borderBottom: isScrolled ? '1px solid rgba(168, 119, 73, 0.25)' : '1px solid rgba(168, 119, 73, 0.12)',
         }}
       >
         <div className="container-custom flex items-center justify-between lg:justify-start lg:gap-12">
@@ -72,7 +72,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden relative z-10 p-2 text-white"
+            className="lg:hidden relative z-10 p-2.5 rounded-lg bg-white/15 border border-white/20 text-white hover:bg-white/25 transition-colors"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
