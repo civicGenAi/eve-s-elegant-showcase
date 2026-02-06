@@ -9,28 +9,75 @@ import {
   LayoutGrid, ArrowLeft 
 } from 'lucide-react';
 
-// Import product images
-import productDiningTable from '@/assets/product-dining-table.jpg';
-import productChair from '@/assets/product-chair.jpg';
-import productCabinet from '@/assets/product-cabinet.jpg';
-import productCoffeeTable from '@/assets/product-coffee-table.jpg';
-import productSofa from '@/assets/product-sofa.jpg';
-import productWardrobe from '@/assets/product-wardrobe.jpg';
+// Subcategory-specific images mapping (used as fallback when product has no gallery)
+const subcategoryImages: Record<string, string> = {
+  // Living Room
+  'TV Stands & Media Consoles': '/assets/lv/tv.jpg',
+  'Coffee Tables': '/assets/lv/cof.jpg',
+  'Sleeper Sofas & Futons': '/assets/lv/sleeper-sofa.jpg',
+  'Sectionals': '/assets/lv/section.jpg',
+  'Sofas': '/assets/lv/sofa.jpg',
+  'Living Room Sets': '/assets/lv/living-set.jpg',
+  'End & Side Tables': '/assets/lv/endsidetbl.jpg',
+  'Accent Chairs & Recliners': '/assets/lv/accent.jpg',
+  'Cabinets & Chests': '/assets/lv/cabinet.jpg',
+  'Ottomans & Benches': '/assets/lv/ottomans.jpg',
+  
+  // Kitchen & Dining
+  'Dining Tables': '/assets/lv/dining-table.jpg',
+  'Dining Chairs & Benches': '/assets/lv/dining-chairs.jpg',
+  'Kitchen Island & Carts': '/assets/lv/kitchen-island.jpg',
+  'Dining Sets': '/assets/lv/dining-set.jpg',
+  'Sideboards & Buffets': '/assets/lv/sideboard.jpg',
+  'Bar Stools & Counter Stools': '/assets/lv/bar-stools.jpg',
+  'Bar Tables': '/assets/lv/bar-table.jpg',
+  'Wine Cabinets & Racks': '/assets/lv/wine-cabinet.jpg',
+  'Display Cabinets': '/assets/lv/display-cabinet.jpg',
+  
+  // Bedroom
+  'Beds': '/assets/lv/bed.jpg',
+  'Nightstands': '/assets/lv/nightstand.jpg',
+  'Makeup Vanities': '/assets/lv/vanity.jpg',
+  'Dressers & Chests': '/assets/lv/dresser.jpg',
+  'Bedroom Sets': '/assets/lv/bedroom-set.jpg',
+  'Vanity Stools': '/assets/lv/vanity-stool.jpg',
+  'Bedroom Benches': '/assets/lv/ottomans.jpg',
+  'Armoires & Wardrobes': '/assets/lv/wardrobe.jpg',
+  'Clothes & Garment Racks': '/assets/lv/garment-rack.jpg',
+  
+  // Office
+  'Desks': '/assets/lv/desk.jpg',
+  'Office Chairs': '/assets/lv/office-chair.jpg',
+  'Bookshelves & Bookcases': '/assets/lv/bookshelf.jpg',
+  'Desk & Chair Sets': '/assets/lv/desk.jpg',
+  
+  // Entryway
+  'Console Tables': '/assets/lv/console-table.jpg',
+  'Entryway Benches': '/assets/lv/entryway-bench.jpg',
+  'Shoe Storage': '/assets/lv/shoe-storage.jpg',
+  'Coat Racks & Hall Trees': '/assets/lv/coat-rack.jpg',
+  'Umbrella Stands': '/assets/lv/console-table.jpg',
+  
+  // Baby & Kids
+  'Cribs': '/assets/lv/crib.jpg',
+  'Kids Beds': '/assets/lv/kids-bed.jpg',
+  'Kids Desks': '/assets/lv/kids-desk.jpg',
+  'Kids Storage': '/assets/lv/kids-storage.jpg',
+  'Kids Chairs': '/assets/lv/kids-desk.jpg',
+};
 
-// Product image map
-const imageMap: Record<number, string> = {
-  1: productCoffeeTable, 2: productCoffeeTable, 3: productCoffeeTable,
-  4: productCoffeeTable, 5: productCoffeeTable, 6: productSofa,
-  7: productSofa, 8: productSofa, 9: productCoffeeTable,
-  10: productChair, 11: productCabinet, 12: productCoffeeTable,
-  13: productDiningTable, 14: productDiningTable, 15: productChair,
-  16: productChair, 17: productChair, 18: productCabinet,
-  19: productCabinet, 20: productCabinet, 21: productCabinet,
-  22: productCabinet, 23: productCabinet, 24: productWardrobe,
-  25: productDiningTable, 26: productDiningTable, 27: productChair,
-  28: productChair, 29: productCabinet, 30: productCoffeeTable,
-  31: productCabinet, 32: productCabinet, 33: productCabinet,
-  34: productCabinet, 35: productDiningTable,
+// Get image for a product - uses product gallery first, then subcategory fallback
+const getProductImage = (product: Product): string => {
+  // First check if product has a valid gallery image
+  if (product.gallery && product.gallery.length > 0) {
+    const galleryImage = product.gallery[0];
+    // Only use gallery image if it's a valid /assets/lv/ path
+    if (galleryImage.startsWith('/assets/lv/')) {
+      return galleryImage;
+    }
+  }
+  // Fallback to subcategory image
+  return subcategoryImages[product.subcategory] || '/assets/lv/livingr.jpg';
 };
 
 interface FilterState {
@@ -491,7 +538,7 @@ const SubcategoryPage = () => {
                     >
                       <div className="relative aspect-square rounded-2xl overflow-hidden bg-secondary mb-4">
                         <img
-                          src={imageMap[product.id] || productDiningTable}
+                          src={getProductImage(product)}
                           alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
