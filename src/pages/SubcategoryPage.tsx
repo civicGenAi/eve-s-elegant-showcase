@@ -222,28 +222,28 @@ const SubcategoryPage = () => {
   return (
     <Layout>
       {/* Breadcrumb & Header */}
-      <section className="bg-secondary py-8">
+      <section className="bg-secondary py-12 md:py-16">
         <div className="container-custom">
           <button
             onClick={() => navigate('/products')}
-            className="flex items-center gap-2 text-muted-foreground hover:text-accent mb-4 transition-colors"
+            className="flex items-center gap-2 text-muted-foreground hover:text-accent mb-6 transition-colors"
           >
             <ArrowLeft size={20} />
             <span>Back to Products</span>
           </button>
 
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-6">
             <span>Home</span>
             <span>/</span>
             <span>{decodedCategory}</span>
             <span>/</span>
-            <span className="text-accent font-medium">{decodedSubcategory}</span>
+            <span className="text-accent font-medium break-words">{decodedSubcategory}</span>
           </div>
 
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-2">
+          <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight">
             {decodedSubcategory}
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-lg">
             {categoryProducts.length} products available
           </p>
         </div>
