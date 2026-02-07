@@ -3,74 +3,8 @@ import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { products, Product } from '@/data/products';
+import { getProductImage } from '@/data/productImages';
 import { useMemo, useState } from 'react';
-
-// Same subcategory-specific image mapping as ProductModal
-const subcategoryImageMap: Record<string, Record<string, string>> = {
-  'Living Room': {
-    'TV Stands & Media Consoles': '/assets/lv/tv.jpg',
-    'Coffee Tables': '/assets/lv/cof.jpg',
-    'Sectionals': '/assets/lv/section.jpg',
-    'Sofas': '/assets/lv/sofa.jpg',
-    'End & Side Tables': '/assets/lv/endsidetbl.jpg',
-    'Accent Chairs & Recliners': '/assets/lv/accent.jpg',
-    'Cabinets & Chests': '/assets/lv/cabinet.jpg',
-    'Ottomans & Benches': '/assets/lv/ottomans.jpg',
-    'Complete Living Sets': '/assets/lv/living-set.jpg',
-    'Sleeper Sofas': '/assets/lv/sleeper-sofa.jpg',
-  },
-  'Kitchen & Dining': {
-    'Dining Tables': '/assets/lv/dining-table.jpg',
-    'Dining Chairs & Benches': '/assets/lv/dining-chairs.jpg',
-    'Bar Stools & Counter Stools': '/assets/lv/bar-stools.jpg',
-    'Kitchen Islands & Carts': '/assets/lv/kitchen-island.jpg',
-    'Sideboards & Buffets': '/assets/lv/sideboard.jpg',
-    'Bar Tables & Pub Sets': '/assets/lv/bar-table.jpg',
-    'Wine & Bar Cabinets': '/assets/lv/wine-cabinet.jpg',
-    'Display & China Cabinets': '/assets/lv/display-cabinet.jpg',
-    'Complete Dining Sets': '/assets/lv/dining-set.jpg',
-  },
-  'Bedroom': {
-    'Beds & Bed Frames': '/assets/lv/bed.jpg',
-    'Nightstands': '/assets/lv/nightstand.jpg',
-    'Vanities & Mirrors': '/assets/lv/vanity.jpg',
-    'Dressers': '/assets/lv/dresser.jpg',
-    'Wardrobes & Armoires': '/assets/lv/wardrobe.jpg',
-    'Complete Bedroom Sets': '/assets/lv/bedroom-set.jpg',
-    'Vanity Stools & Benches': '/assets/lv/vanity-stool.jpg',
-  },
-  'Office': {
-    'Desks': '/assets/lv/desk.jpg',
-    'Office Chairs': '/assets/lv/office-chair.jpg',
-    'Bookshelves': '/assets/lv/bookshelf.jpg',
-  },
-  'Entryway': {
-    'Console Tables': '/assets/lv/console-table.jpg',
-    'Entryway Benches': '/assets/lv/entryway-bench.jpg',
-    'Shoe Storage': '/assets/lv/shoe-storage.jpg',
-    'Coat Racks & Hall Trees': '/assets/lv/coat-rack.jpg',
-    'Garment Racks': '/assets/lv/garment-rack.jpg',
-  },
-  'Baby & Kids': {
-    'Cribs & Bassinets': '/assets/lv/crib.jpg',
-    'Kids Beds': '/assets/lv/kids-bed.jpg',
-    'Kids Desks & Chairs': '/assets/lv/kids-desk.jpg',
-    'Kids Storage': '/assets/lv/kids-storage.jpg',
-  },
-};
-
-// Get the correct image for a product based on its category and subcategory
-const getProductImage = (product: Product): string => {
-  const categoryImages = subcategoryImageMap[product.category];
-  if (categoryImages) {
-    const subcategoryImage = categoryImages[product.subcategory];
-    if (subcategoryImage) {
-      return subcategoryImage;
-    }
-  }
-  // Fallback
-  return '/assets/lv/living-set.jpg';
-};
 
 // Get unique featured products - one from each unique subcategory across all categories
 const getFeaturedProducts = (): Product[] => {
@@ -87,8 +21,8 @@ const getFeaturedProducts = (): Product[] => {
     'Dining Tables',
     'Bar Stools & Counter Stools',
     // Bedroom
-    'Beds & Bed Frames',
-    'Wardrobes & Armoires',
+    'Beds',
+    'Armoires & Wardrobes',
     // Office
     'Desks',
     'Office Chairs',
@@ -96,8 +30,7 @@ const getFeaturedProducts = (): Product[] => {
     'Console Tables',
     'Entryway Benches',
     // Baby & Kids
-    'Kids Beds',
-    'Cribs & Bassinets',
+    'Cribs',
   ];
   
   // Get one product from each target subcategory
