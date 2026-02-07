@@ -66,17 +66,9 @@ const subcategoryImages: Record<string, string> = {
   'Kids Chairs': '/assets/lv/kids-desk.jpg',
 };
 
-// Get image for a product - uses product gallery first, then subcategory fallback
+// Get image for a product - uses subcategory image mapping for consistency
 const getProductImage = (product: Product): string => {
-  // First check if product has a valid gallery image
-  if (product.gallery && product.gallery.length > 0) {
-    const galleryImage = product.gallery[0];
-    // Only use gallery image if it's a valid /assets/lv/ path
-    if (galleryImage.startsWith('/assets/lv/')) {
-      return galleryImage;
-    }
-  }
-  // Fallback to subcategory image
+  // Use the subcategory image which are the actual available images in /assets/lv/
   return subcategoryImages[product.subcategory] || '/assets/lv/livingr.jpg';
 };
 
@@ -222,7 +214,7 @@ const SubcategoryPage = () => {
   return (
     <Layout>
       {/* Breadcrumb & Header */}
-      <section className="bg-secondary py-12 md:py-16">
+      <section className="bg-secondary pt-32 md:pt-36 pb-12 md:pb-16">
         <div className="container-custom">
           <button
             onClick={() => navigate('/products')}
