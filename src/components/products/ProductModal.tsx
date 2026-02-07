@@ -2,75 +2,19 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MessageCircle, Ruler, Layers, Check, Share2, Facebook, Link2, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { Product } from '@/data/products';
+import { getProductImage, subcategoryImages } from '@/data/productImages';
 
-// Subcategory-specific image mapping using public/assets/lv/ images
-const subcategoryImageMap: Record<string, Record<string, string[]>> = {
-  'Living Room': {
-    'TV Stands & Media Consoles': ['/assets/lv/tv.jpg', '/assets/lv/cabinet.jpg', '/assets/lv/display-cabinet.jpg'],
-    'Coffee Tables': ['/assets/lv/cof.jpg', '/assets/lv/endsidetbl.jpg', '/assets/lv/console-table.jpg'],
-    'Sectionals': ['/assets/lv/section.jpg', '/assets/lv/sofa.jpg', '/assets/lv/living-set.jpg'],
-    'Sofas': ['/assets/lv/sofa.jpg', '/assets/lv/section.jpg', '/assets/lv/sleeper-sofa.jpg'],
-    'End & Side Tables': ['/assets/lv/endsidetbl.jpg', '/assets/lv/cof.jpg', '/assets/lv/console-table.jpg'],
-    'Accent Chairs & Recliners': ['/assets/lv/accent.jpg', '/assets/lv/ottomans.jpg', '/assets/lv/livingr.jpg'],
-    'Cabinets & Chests': ['/assets/lv/cabinet.jpg', '/assets/lv/display-cabinet.jpg', '/assets/lv/bookshelf.jpg'],
-    'Ottomans & Benches': ['/assets/lv/ottomans.jpg', '/assets/lv/accent.jpg', '/assets/lv/entryway-bench.jpg'],
-    'Complete Living Sets': ['/assets/lv/living-set.jpg', '/assets/lv/sofa.jpg', '/assets/lv/section.jpg'],
-    'Sleeper Sofas': ['/assets/lv/sleeper-sofa.jpg', '/assets/lv/sofa.jpg', '/assets/lv/section.jpg'],
-  },
-  'Kitchen & Dining': {
-    'Dining Tables': ['/assets/lv/dining-table.jpg', '/assets/lv/dining-set.jpg', '/assets/lv/kitchen-island.jpg'],
-    'Dining Chairs & Benches': ['/assets/lv/dining-chairs.jpg', '/assets/lv/dining-set.jpg', '/assets/lv/bar-stools.jpg'],
-    'Bar Stools & Counter Stools': ['/assets/lv/bar-stools.jpg', '/assets/lv/bar-table.jpg', '/assets/lv/kitchen-island.jpg'],
-    'Kitchen Islands & Carts': ['/assets/lv/kitchen-island.jpg', '/assets/lv/sideboard.jpg', '/assets/lv/bar-table.jpg'],
-    'Sideboards & Buffets': ['/assets/lv/sideboard.jpg', '/assets/lv/display-cabinet.jpg', '/assets/lv/wine-cabinet.jpg'],
-    'Bar Tables & Pub Sets': ['/assets/lv/bar-table.jpg', '/assets/lv/bar-stools.jpg', '/assets/lv/dining-table.jpg'],
-    'Wine & Bar Cabinets': ['/assets/lv/wine-cabinet.jpg', '/assets/lv/bar-table.jpg', '/assets/lv/display-cabinet.jpg'],
-    'Display & China Cabinets': ['/assets/lv/display-cabinet.jpg', '/assets/lv/sideboard.jpg', '/assets/lv/cabinet.jpg'],
-    'Complete Dining Sets': ['/assets/lv/dining-set.jpg', '/assets/lv/dining-table.jpg', '/assets/lv/dining-chairs.jpg'],
-  },
-  'Bedroom': {
-    'Beds & Bed Frames': ['/assets/lv/bed.jpg', '/assets/lv/bedroom-set.jpg', '/assets/lv/nightstand.jpg'],
-    'Nightstands': ['/assets/lv/nightstand.jpg', '/assets/lv/bed.jpg', '/assets/lv/dresser.jpg'],
-    'Vanities & Mirrors': ['/assets/lv/vanity.jpg', '/assets/lv/vanity-stool.jpg', '/assets/lv/dresser.jpg'],
-    'Dressers': ['/assets/lv/dresser.jpg', '/assets/lv/wardrobe.jpg', '/assets/lv/nightstand.jpg'],
-    'Wardrobes & Armoires': ['/assets/lv/wardrobe.jpg', '/assets/lv/dresser.jpg', '/assets/lv/bedroom-set.jpg'],
-    'Complete Bedroom Sets': ['/assets/lv/bedroom-set.jpg', '/assets/lv/bed.jpg', '/assets/lv/wardrobe.jpg'],
-    'Vanity Stools & Benches': ['/assets/lv/vanity-stool.jpg', '/assets/lv/vanity.jpg', '/assets/lv/ottomans.jpg'],
-  },
-  'Office': {
-    'Desks': ['/assets/lv/desk.jpg', '/assets/lv/office-chair.jpg', '/assets/lv/bookshelf.jpg'],
-    'Office Chairs': ['/assets/lv/office-chair.jpg', '/assets/lv/desk.jpg', '/assets/lv/bookshelf.jpg'],
-    'Bookshelves': ['/assets/lv/bookshelf.jpg', '/assets/lv/desk.jpg', '/assets/lv/cabinet.jpg'],
-  },
-  'Entryway': {
-    'Console Tables': ['/assets/lv/console-table.jpg', '/assets/lv/entryway-bench.jpg', '/assets/lv/shoe-storage.jpg'],
-    'Entryway Benches': ['/assets/lv/entryway-bench.jpg', '/assets/lv/console-table.jpg', '/assets/lv/coat-rack.jpg'],
-    'Shoe Storage': ['/assets/lv/shoe-storage.jpg', '/assets/lv/entryway-bench.jpg', '/assets/lv/coat-rack.jpg'],
-    'Coat Racks & Hall Trees': ['/assets/lv/coat-rack.jpg', '/assets/lv/garment-rack.jpg', '/assets/lv/entryway-bench.jpg'],
-    'Garment Racks': ['/assets/lv/garment-rack.jpg', '/assets/lv/coat-rack.jpg', '/assets/lv/wardrobe.jpg'],
-  },
-  'Baby & Kids': {
-    'Cribs & Bassinets': ['/assets/lv/crib.jpg', '/assets/lv/kids-bed.jpg', '/assets/lv/kids-storage.jpg'],
-    'Kids Beds': ['/assets/lv/kids-bed.jpg', '/assets/lv/crib.jpg', '/assets/lv/kids-desk.jpg'],
-    'Kids Desks & Chairs': ['/assets/lv/kids-desk.jpg', '/assets/lv/kids-bed.jpg', '/assets/lv/kids-storage.jpg'],
-    'Kids Storage': ['/assets/lv/kids-storage.jpg', '/assets/lv/kids-bed.jpg', '/assets/lv/kids-desk.jpg'],
-  },
-};
-
-// Helper function to get images for a product based on its category/subcategory
+// Helper function to get gallery images for the modal (multiple views)
 const getProductImages = (product: Product): string[] => {
-  const categoryImages = subcategoryImageMap[product.category];
-  if (categoryImages) {
-    const subcategoryImages = categoryImages[product.subcategory];
-    if (subcategoryImages && subcategoryImages.length > 0) {
-      return subcategoryImages;
-    }
+  // Start with the unique product image
+  const mainImage = getProductImage(product);
+  // Add the subcategory image as a second view if different
+  const subcatImage = subcategoryImages[product.subcategory];
+  const images = [mainImage];
+  if (subcatImage && subcatImage !== mainImage) {
+    images.push(subcatImage);
   }
-  // Fallback to product's gallery if available, or default images
-  if (product.gallery && product.gallery.length > 0) {
-    return product.gallery;
-  }
-  return ['/assets/lv/living-set.jpg', '/assets/lv/sofa.jpg'];
+  return images;
 };
 
 interface ProductModalProps {
